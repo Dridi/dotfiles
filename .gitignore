@@ -1,14 +1,20 @@
 # javac/maven
 #
 *.class
-*.?ar
+*.jar
+*.war
+*.ear
 target/
 
 # gcc
 #
-*.s
-*.o
+*.[soa]
 *.so*
+
+# autotools
+#
+*.l[oa]
+*.in
 
 # rpmbuild
 #
@@ -25,14 +31,15 @@ target/
 .classpath
 .settings/
 
-# archive
+# archives
 #
 *.tar
 *.zip
 *.gz
+*.bz2
 
 # misc
 #
 *~
 *.swp
-
+*.log
