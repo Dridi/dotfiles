@@ -1,0 +1,38 @@
+# javac/maven
+#
+*.class
+*.?ar
+target/
+
+# gcc
+#
+*.s
+*.o
+*.so*
+
+# rpmbuild
+#
+*.rpm
+
+# intellij
+#
+.idea/
+*.iml
+
+# eclipse
+#
+.project
+.classpath
+.settings/
+
+# archive
+#
+*.tar
+*.zip
+*.gz
+
+# misc
+#
+*~
+*.swp
+
