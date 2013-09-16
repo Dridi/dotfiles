@@ -1,9 +1,12 @@
 # .bashrc
 
 # Source global definitions
-[ -f /etc/bashrc ]          && . /etc/bashrc
+[ -f /etc/bashrc          ] && . /etc/bashrc
 [ -f /etc/bash_completion ] && . /etc/bash_completion
-[ -f ~/.bash_aliases ]      && . ~/.bash_aliases
+
+# Source local definitions
+[ -f ~/.bash_aliases ] && . ~/.bash_aliases
+[ -f ~/.bash_custom  ] && . ~/.bash_custom
 
 # shell
 shopt -s globstar
