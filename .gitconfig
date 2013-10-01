@@ -55,5 +55,18 @@
 	name = Dridi Boukelmoune
 	email = dridi.boukelmoune@gmail.com
 
+[diff]
+	mnemonicprefix = true
+
 [push]
-	default = simple
+	default = upstream
+
+[pull]
+	rebase = true
+
+[rebase]
+	autosquash = true
+	autostash = true
+
+[rerere]
+	enabled = true
