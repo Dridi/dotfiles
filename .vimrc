@@ -62,6 +62,7 @@ if has("autocmd")
 
   autocmd FileType html setlocal ts=2 sts=2 sw=2 expandtab
   autocmd FileType xml  setlocal ts=2 sts=2 sw=2 expandtab
+  autocmd FileType svg  setlocal ts=2 sts=2 sw=2 expandtab
   autocmd FileType css  setlocal ts=2 sts=2 sw=2 expandtab
   autocmd FileType vim  setlocal ts=2 sts=2 sw=2 expandtab
 endif
