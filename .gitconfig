@@ -34,7 +34,7 @@
 	sdiff = diff --staged
 	cdiff = diff --cached --find-renames
 	udiff = !git diff `git upstream`..
-	wdiff = diff --word-diff
+	wdiff = diff --word-diff-regex='\\w+'
 	ignored = ls-files --others -i --exclude-standard --directory
 	full-tree = ls-tree --full-tree -r HEAD
 
