@@ -60,6 +60,8 @@ if has("autocmd")
 
   autocmd FileType make setlocal ts=4 sts=4 sw=4 noexpandtab
 
+  autocmd FileType python setlocal ts=4 sts=4 sw=4 expandtab
+
   autocmd FileType html setlocal ts=2 sts=2 sw=2 expandtab
   autocmd FileType xml  setlocal ts=2 sts=2 sw=2 expandtab
   autocmd FileType svg  setlocal ts=2 sts=2 sw=2 expandtab
