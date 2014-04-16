@@ -38,6 +38,8 @@
 	ignored = ls-files --others -i --exclude-standard --directory
 	full-tree = ls-tree --full-tree -r HEAD
 
+	addp = add -p
+	amend = commit --amend
 	undo = reset --hard
 	type = cat-file -t
 	dump = cat-file -p
