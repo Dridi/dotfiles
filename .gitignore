@@ -33,8 +33,9 @@ target/
 
 # archives
 #
-*.tar
 *.zip
+*.tar
+*.tgz
 *.gz
 *.bz2
 
@@ -43,3 +44,4 @@ target/
 *~
 *.swp
 *.log
+*.pdf
