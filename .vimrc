@@ -67,6 +67,8 @@ if has("autocmd")
   autocmd FileType svg  setlocal ts=2 sts=2 sw=2 expandtab
   autocmd FileType css  setlocal ts=2 sts=2 sw=2 expandtab
   autocmd FileType vim  setlocal ts=2 sts=2 sw=2 expandtab
+
+  autocmd BufNewFile,BufRead *.md set filetype=markdown
 endif
 
 "
