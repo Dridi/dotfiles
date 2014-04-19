@@ -1,12 +1,14 @@
 # .bashrc
 
+source_if_exists() {
+	for f; do [ -f "$f" ] && . "$f"; done
+}
+
 # Source global definitions
-[ -f /etc/bashrc          ] && . /etc/bashrc
-[ -f /etc/bash_completion ] && . /etc/bash_completion
+source_if_exists /etc/bashrc /etc/bash_completion
 
 # Source local definitions
-[ -f ~/.bash_aliases ] && . ~/.bash_aliases
-[ -f ~/.bash_custom  ] && . ~/.bash_custom
+source_if_exists ~/.bash_aliases ~/.bash_custom
 
 # shell
 shopt -s globstar
@@ -18,10 +20,7 @@ HISTSIZE=1000
 HISTFILESIZE=2000
 
 # git
-if [ -e /usr/share/git-core/contrib/completion/git-prompt.sh ]
-then
-	. /usr/share/git-core/contrib/completion/git-prompt.sh
-fi
+source_if_exists /usr/share/git-core/contrib/completion/git-prompt.sh
 
 if type __git_ps1 >/dev/null 2>&1
 then
