@@ -1,0 +1,28 @@
+#!/bin/bash
+
+set -e
+
+usage() {
+	cat >&2 <<-EOF
+		usage: git fedora-github-archive <tag> [<name>]
+	EOF
+	return 1
+}
+
+[ $# -lt 1 -o $# -gt 2 ] && usage
+
+tag="$1"
+object_type="$(git cat-file -t "$tag")"
+
+if [ "$object_type" != "tag" ]
+then
+	echo >&2 "fatal: not a tag: '$tag'"
+	exit 1
+fi
+
+object_hash="$(git cat-file tag "$tag" | awk '/^object / {print $2}')"
+short_commit=${object_hash:0:7}
+
+[ $# = 2 ] && name="$2" || name="$(basename "$PWD")"
+
+git archive --format=tar.gz --prefix="$name-$object_hash/" "$object_hash" >"$name-$tag-$short_commit".tar.gz
