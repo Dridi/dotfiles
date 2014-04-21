@@ -35,4 +35,5 @@ then
 fi
 
 # less
+export LESS=FRSX
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
