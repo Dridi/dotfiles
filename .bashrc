@@ -20,9 +20,9 @@ HISTSIZE=1000
 HISTFILESIZE=2000
 
 # git
-source_if_exists /usr/share/git-core/contrib/completion/git-prompt.sh
-
 export GIT_EXEC_PATH=~/.config/git/libexec:"$(GIT_EXEC_PATH= git --exec-path)"
+
+source_if_exists /usr/share/git-core/contrib/completion/git-prompt.sh
 
 if type __git_ps1 >/dev/null 2>&1
 then
