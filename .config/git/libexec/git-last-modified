@@ -1,0 +1,20 @@
+#!/bin/sh
+
+set -e
+
+get_last_modified() {
+	# XXX this is not timezone-proof
+	git log -100 --pretty=format:'%ci' -- "$1" |
+	sort -r |
+	head -1
+}
+
+print_last_modified() {
+	while read -r file
+	do
+		printf "%s\t%s\n" "$(get_last_modified "$file")" "$file"
+	done
+}
+
+git ls-files "$@" |
+print_last_modified
