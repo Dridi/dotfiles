@@ -1,0 +1,30 @@
+#!/bin/bash
+
+set -e
+
+usage() {
+	cat >&2 <<-EOF
+		usage: git sed -e expression... [ -- ] [file...]
+	EOF
+	return 1
+}
+
+declare -a e
+
+while getopts e:h opt
+do
+        case "$opt" in
+        e) e=("${e[@]}" -e "$OPTARG") ;;
+        *) usage ;;
+        esac
+done
+
+shift $((OPTIND - 1))
+
+[ ${#e[@]} == 0 ] && usage
+
+git ls-files "$@" |
+while read -r file
+do
+	sed -i "${e[@]}" -- "$file"
+done
