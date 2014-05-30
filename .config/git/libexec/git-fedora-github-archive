@@ -14,13 +14,19 @@ usage() {
 tag="$1"
 object_type="$(git cat-file -t "$tag")"
 
-if [ "$object_type" != "tag" ]
-then
-	echo >&2 "fatal: not a tag: '$tag'"
-	exit 1
-fi
+case "$object_type" in
+	tag)
+		object_hash="$(git cat-file tag "$tag" | awk '/^object / {print $2}')"
+		;;
+	commit)
+		object_hash="$(git show "$tag" | awk '/^commit / {print $2}')"
+		;;
+	*)
+		echo >&2 "fatal: not a tag: '$tag'"
+		exit 1
+		;;
+esac
 
-object_hash="$(git cat-file tag "$tag" | awk '/^object / {print $2}')"
 short_commit=${object_hash:0:7}
 
 [ $# = 2 ] && name="$2" || name="$(basename "$PWD")"
