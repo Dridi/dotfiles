@@ -24,7 +24,4 @@ shift $((OPTIND - 1))
 [ ${#e[@]} == 0 ] && usage
 
 git ls-files "$@" |
-while read -r file
-do
-	sed -i "${e[@]}" -- "$file"
-done
+xargs sed -i "${e[@]}" --
