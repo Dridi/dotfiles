@@ -45,7 +45,7 @@
 	dump = cat-file -p
 	todo = grep -Iw -ie todo -ie fixme -ie xxx
 	authors = !git log --all --format='%an <%ae>' | sort -u
-	aliases = !git config --get-regexp 'alias.*' | colrm 1 6 | sed 's/[ ]/ = /'
+	aliases = !git config --get-regexp 'alias.*' | colrm 1 6 | sed 's/ / = /'
 	who = !git config --get 'user.email' | tail -n 1 | cut -d @ -f 2
 
 	upstream = rev-parse --abbrev-ref --symbolic-full-name @{u}
