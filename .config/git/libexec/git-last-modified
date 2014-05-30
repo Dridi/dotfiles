@@ -10,11 +10,11 @@ get_last_modified() {
 }
 
 print_last_modified() {
-	while read -r file
-	do
-		printf "%s\t%s\n" "$(get_last_modified "$file")" "$file"
-	done
+	printf "%s\t%s\n" "$(get_last_modified "$1")" "$1"
 }
 
 git ls-files "$@" |
-print_last_modified
+while read -r file
+do
+	print_last_modified "$file"
+done
