@@ -13,7 +13,7 @@ print_last_modified() {
 	printf "%s\t%s\n" "$(get_last_modified "$1")" "$1"
 }
 
-git ls-files "$@" |
+git ls-files -- "$@" |
 while read -r file
 do
 	print_last_modified "$file"

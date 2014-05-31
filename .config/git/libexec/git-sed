@@ -5,6 +5,7 @@ set -e
 usage() {
 	cat >&2 <<-EOF
 		usage: git sed -e expression... [ -- ] [file...]
+		       git sed -h
 	EOF
 	return 1
 }
@@ -23,5 +24,5 @@ shift $((OPTIND - 1))
 
 [ ${#e[@]} == 0 ] && usage
 
-git ls-files "$@" |
+git ls-files -- "$@" |
 xargs sed -i "${e[@]}" --
