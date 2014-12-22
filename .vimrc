@@ -60,7 +60,8 @@ if has("autocmd")
 
   autocmd FileType make setlocal ts=4 sts=4 sw=4 noexpandtab
 
-  autocmd FileType python setlocal ts=4 sts=4 sw=4 expandtab
+  autocmd FileType python     setlocal ts=4 sts=4 sw=4 expandtab
+  autocmd FileType javascript setlocal ts=2 sts=2 sw=2 expandtab
 
   autocmd FileType html setlocal ts=2 sts=2 sw=2 expandtab
   autocmd FileType xml  setlocal ts=2 sts=2 sw=2 expandtab
@@ -69,6 +70,9 @@ if has("autocmd")
   autocmd FileType vim  setlocal ts=2 sts=2 sw=2 expandtab
 
   autocmd BufNewFile,BufRead *.md set filetype=markdown
+  autocmd BufNewFile,BufRead *.vcl set filetype=perl
+  autocmd BufNewFile,BufRead *.vtc set filetype=perl
+  autocmd BufNewFile,BufRead *.jelly set filetype=xml
 endif
 
 "
