@@ -21,6 +21,9 @@ alias -- -="cd -"
 
 alias dl="cd ~/Downloads"
 
+# gpg
+alias gpg=gpg2
+
 # svn
 alias di="svn di | view -c 'setf diff' -"
 alias st="svn st"
@@ -33,3 +36,15 @@ rpmqf() {
 		&& rpm -qf "$absolute_path"
 	done
 }
+
+# misc
+crc32() {
+	for i
+	do
+		local CRC=$(echo -n "$i" | cksum | cut -d' ' -f1)
+		printf "0x%08x\n" "$CRC"
+	done
+}
+
+# X11
+alias xfix="xset s 0 0 dpms 0 0 0"
