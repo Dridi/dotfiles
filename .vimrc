@@ -155,3 +155,31 @@ function! SummarizeHardWrapping()
   endtry
 endfunction
 
+"
+" Gradle
+"
+nmap <leader>g :!clear && gradle build<CR>
+
+"
+" Syntastic
+"
+function! SyntasCheck()
+  if !empty(glob(".syntastic_*"))
+    source glob(".syntastic_*")
+  endif
+endfunction
+
+if has("autocmd")
+  au VimEnter,ShellCmdPost * call SyntasCheck()
+endif
+
+"
+" :bdelete replacement
+"
+nmap <C-D> :bp<bar>bd#<CR>
+
+"
+" long lines hunt
+"
+highlight OverLength ctermbg=red ctermfg=white
+match OverLength /\%>78v.\+/
