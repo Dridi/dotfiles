@@ -16,10 +16,16 @@ object_type="$(git cat-file -t "$tag")"
 
 case "$object_type" in
 	tag)
-		object_hash="$(git cat-file tag "$tag" | awk '/^object / {print $2}')"
+		object_hash="$(
+			git cat-file tag "$tag" |
+			awk '/^object / {print $2}'
+		)"
 		;;
 	commit)
-		object_hash="$(git show "$tag" | awk '/^commit / {print $2}')"
+		object_hash="$(
+			git show "$tag" |
+			awk '/^commit / {print $2}'
+		)"
 		;;
 	*)
 		echo >&2 "fatal: not a tag: '$tag'"

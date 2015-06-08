@@ -20,12 +20,15 @@
 	br = branch
 	rb = rebase
 	fe = fetch
-	ff = !git rb `git upstream`
 	fp = format-patch
 	cp = cherry-pick
 	di = diff
 	st = status
-	s  = status -s
+	s  = status -suall
+
+	ap = add -p
+	rp = reset -p
+	cop = checkout -p
 
 	ulog = !git log `git upstream`..
 	wtfchanged = log --stat --find-renames --pretty=format:\"%C(yellow)%h%C(cyan)%d%C(reset) (%ar - %C(red)%an%C(reset)) %n%B\"
@@ -38,7 +41,7 @@
 	ignored = ls-files --others -i --exclude-standard --directory
 	full-tree = ls-tree --full-tree -r HEAD
 
-	addp = add -p
+	fixup = commit --fixup
 	amend = commit --amend
 	undo = reset --hard
 	type = cat-file -t
@@ -47,11 +50,12 @@
 	authors = !git log --all --format='%an <%ae>' | sort -u
 	aliases = !git config --get-regexp 'alias.*' | colrm 1 6 | sed 's/ / = /'
 	who = !git config --get 'user.email' | tail -n 1 | cut -d @ -f 2
+	git = !git
 
 	upstream = rev-parse --abbrev-ref --symbolic-full-name @{u}
 	update = !git fe && git ff
 	rework = !git rb -i `git upstream`
-	start = !git init && git ci --allow-empty -m\"initial commit\"
+	start = !git init && git ci --allow-empty -m\"Initial commit\"
 
 [user]
 	name = Dridi Boukelmoune
