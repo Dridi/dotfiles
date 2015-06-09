@@ -164,8 +164,9 @@ nmap <leader>g :!clear && gradle build<CR>
 " Syntastic
 "
 function! SyntasCheck()
-  if !empty(glob(".syntastic_*"))
-    source glob(".syntastic_*")
+  let l:syntastic_files = glob(".syntastic_*")
+  if !empty(l:syntastic_files)
+    execute 'source ' . l:syntastic_files
   endif
 endfunction
 
