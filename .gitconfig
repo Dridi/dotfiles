@@ -46,7 +46,7 @@
 	undo = reset --hard
 	type = cat-file -t
 	dump = cat-file -p
-	todo = grep -Iw -ie todo -ie fixme -ie xxx
+	todo = grep -Iw -ie todo -ie fixme -ie xxx -e UnsupportedOperationException -e 'INCOMPL()' -e xxxassert -e XXXAN -e XXXAZ
 	authors = !git log --all --format='%an <%ae>' | sort -u
 	aliases = !git config --get-regexp 'alias.*' | colrm 1 6 | sed 's/ / = /'
 	who = !git config --get 'user.email' | tail -n 1 | cut -d @ -f 2
@@ -55,6 +55,7 @@
 	upstream = rev-parse --abbrev-ref --symbolic-full-name @{u}
 	update = !git fe && git ff
 	rework = !git rb -i `git upstream`
+	review = !git ulog -p --reverse
 	start = !git init && git ci --allow-empty -m\"Initial commit\"
 
 [user]
