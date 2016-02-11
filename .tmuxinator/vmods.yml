@@ -1,0 +1,17 @@
+name: vmods
+root: ~/src
+
+windows:
+<% for vmod in [
+        'querystring',
+        'named',
+        'h2backend',
+        'fsdirector',
+] %>
+  - <%= "#{vmod}" %>:
+      layout: main-horizontal
+      root: ~/src/libvmod-<%= "#{vmod}" %>
+      panes:
+        - vim -c :vsplit src/*.vcc $(git ls-files '*.[ch]')
+        - git status
+<% end %>

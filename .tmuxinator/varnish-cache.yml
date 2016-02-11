@@ -1,0 +1,32 @@
+name: varnish-cache
+root: ~/varnish/src
+
+windows:
+  - varnish:
+      layout: main-horizontal
+      root: ~/varnish/src/vc
+      panes:
+        - vim -c :vsplit $(git ls-files '*.[ch]')
+        - git status
+  - pkg:
+      root: ~/varnish/src/pkg-varnish-cache
+      panes:
+        - git status
+  - agent:
+      layout: main-horizontal
+      root: ~/varnish/src/vagent2
+      panes:
+        - vim -c :vsplit $(git ls-files '*.[ch]')
+        - git status
+  - gcov:
+      layout: main-horizontal
+      root: ~/varnish/src/varnish-gcov
+      panes:
+        - vim -c :vsplit collect *.py
+        - git status
+  - book:
+      layout: main-horizontal
+      root: ~/varnish/src/Varnish-Book
+      panes:
+        - vim varnish_book.rst
+        - git status

@@ -1,0 +1,47 @@
+name: varnish-plus
+root: ~/varnish/src
+
+windows:
+<% for pkg in [
+        'vcp',
+        'vha',
+        'vstatd',
+        'hitch',
+] %>
+  - <%= "#{pkg}" %>:
+      layout: main-horizontal
+      root: ~/varnish/src/<%= "#{pkg}" %>
+      panes:
+        - vim -c :vsplit $(git ls-files '*.[ch]')
+        - git status
+<% end %>
+
+<% for vmod in [
+        'acl',
+        'cowsay',
+        'example',
+        'hashtwo',
+        'kvstore',
+        'utf8',
+] %>
+  - <%= "#{vmod}" %>:
+      layout: main-horizontal
+      root: ~/varnish/src/libvmod-<%= "#{vmod}" %>
+      panes:
+        - vim -c :vsplit src/*.vcc $(git ls-files '*.[ch]')
+        - git status
+<% end %>
+
+<% for misc in [
+        'pkg-varnish-plus',
+        'spiros',
+        'varnish-tuner',
+        'docker',
+        'customer-reports',
+        'blog',
+] %>
+  - <%= "#{misc}" %>:
+      root: ~/varnish/src/<%= "#{misc}" %>
+      panes:
+        - git status
+<% end %>

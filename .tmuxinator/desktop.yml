@@ -1,0 +1,13 @@
+name: desktop
+root: ~
+
+windows:
+  - desktop:
+      layout: main-horizontal
+      panes:
+        - bluetooth:
+          - bluetoothctl
+          - agent on
+          - default-agent
+          - power on
+        - cd ~/Videos/TODO

@@ -1,0 +1,29 @@
+name: fedora
+root: ~/fedora
+
+windows:
+<% for pkg in [
+        'haproxy',
+        'libslz',
+        'makeself',
+        'numatop',
+        'python-actdiag',
+        'python-blockdiag',
+        'python-funcparserlib',
+        'python-nwdiag',
+        'python-seqdiag',
+        'python-webcolors',
+        'ShellCheck',
+        'tiptop',
+        'varnish',
+        'varnish-agent',
+        'vcsh',
+        'vmod-querystring',
+] %>
+  - <%= "#{pkg}" %>:
+      layout: main-horizontal
+      root: ~/fedora/<%= "#{pkg}" %>
+      panes:
+        - vim <%= "#{pkg}" %>.spec
+        - git status
+<% end %>
