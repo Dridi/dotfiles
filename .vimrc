@@ -181,3 +181,13 @@ highlight TrailingSpaces ctermbg=yellow
 
 au BufEnter,BufWinEnter *  match OverLength     /\%>78v.\+/
 au BufEnter,BufWinEnter * 2match TrailingSpaces /\v\s+$/
+
+"
+" vim plug
+"
+call plug#begin('~/.vim/plugged')
+
+Plug 'scrooloose/syntastic', { 'tag': '3.6.0' }
+Plug 'bronson/vim-visual-star-search'
+
+call plug#end()
