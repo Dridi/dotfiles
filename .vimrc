@@ -164,16 +164,9 @@ nmap <leader>g :!clear && gradle --daemon build<CR>
 "
 " Syntastic
 "
-function! SyntasCheck()
-  let l:syntastic_files = glob(".syntastic_*")
-  if !empty(l:syntastic_files)
-    execute 'source ' . l:syntastic_files
-  endif
-endfunction
+let g:syntastic_check_on_wq = 0
+let g:syntastic_java_javac_config_file_enabled = 1
 
-if has("autocmd")
-  au VimEnter,ShellCmdPost * call SyntasCheck()
-endif
 
 "
 " :bdelete replacement
