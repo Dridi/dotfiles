@@ -177,4 +177,7 @@ nmap <C-D> :bn<bar>bd#<CR>
 " long lines hunt
 "
 highlight OverLength ctermbg=red ctermfg=white
-match OverLength /\%>78v.\+/
+highlight TrailingSpaces ctermbg=yellow
+
+au BufEnter,BufWinEnter *  match OverLength     /\%>78v.\+/
+au BufEnter,BufWinEnter * 2match TrailingSpaces /\v\s+$/
