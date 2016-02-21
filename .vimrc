@@ -21,7 +21,7 @@ set number
 " Invisible characters
 "
 nmap <leader>l :set list!<CR>
-set listchars=tab:▸\ ,eol:¬
+set listchars=tab:▸·,eol:¬
 
 "
 " Indentation
