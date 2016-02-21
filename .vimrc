@@ -73,6 +73,7 @@ if has("autocmd")
   autocmd BufNewFile,BufRead *.vcl set filetype=perl
   autocmd BufNewFile,BufRead *.vtc set filetype=perl
   autocmd BufNewFile,BufRead *.jelly set filetype=xml
+  autocmd BufNewFile,BufRead *.gradle set filetype=groovy
 endif
 
 "
@@ -158,7 +159,7 @@ endfunction
 "
 " Gradle
 "
-nmap <leader>g :!clear && gradle build<CR>
+nmap <leader>g :!clear && gradle --daemon build<CR>
 
 "
 " Syntastic
