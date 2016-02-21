@@ -171,7 +171,7 @@ let g:syntastic_java_javac_config_file_enabled = 1
 "
 " :bdelete replacement
 "
-nmap <C-D> :bp<bar>bd#<CR>
+nmap <C-D> :bn<bar>bd#<CR>
 
 "
 " long lines hunt
