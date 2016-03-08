@@ -189,5 +189,6 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'scrooloose/syntastic', { 'tag': '3.6.0' }
 Plug 'bronson/vim-visual-star-search'
+Plug 'airblade/vim-gitgutter'
 
 call plug#end()
