@@ -18,6 +18,12 @@ windows:
       panes:
         - vim -c :vsplit $(git ls-files '*.[ch]')
         - git status
+  - vmod-example:
+      layout: main-horizontal
+      root: ~/varnish/src/libvmod-example
+      panes:
+        - vim -c :vsplit src/*.vcc $(git ls-files '*.[ch]')
+        - git status
   - gcov:
       layout: main-horizontal
       root: ~/varnish/src/varnish-gcov

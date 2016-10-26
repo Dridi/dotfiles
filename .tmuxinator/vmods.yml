@@ -4,9 +4,9 @@ root: ~/src
 windows:
 <% for vmod in [
         'querystring',
-        'named',
         'h2backend',
         'fsdirector',
+        'dynamic',
 ] %>
   - <%= "#{vmod}" %>:
       layout: main-horizontal

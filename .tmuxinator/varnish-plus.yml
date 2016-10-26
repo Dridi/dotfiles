@@ -19,7 +19,6 @@ windows:
 <% for vmod in [
         'acl',
         'cowsay',
-        'example',
         'hashtwo',
         'kvstore',
         'utf8',
