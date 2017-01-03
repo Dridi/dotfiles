@@ -4,7 +4,7 @@ set -e
 
 usage() {
 	cat >&2 <<-EOF
-		usage: git sed -e expression... [ -- ] [file...]
+		usage: git sed -e expression... [ -- ] [<file>...]
 		       git sed -h
 	EOF
 	return 1

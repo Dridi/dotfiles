@@ -1,0 +1,27 @@
+#!/bin/sh
+
+set -e
+
+usage() {
+	cat >&2 <<-EOF
+		git-touch - Add empty files to the index
+
+		usage: git touch <file>...
+	EOF
+	return 1
+}
+
+test $# -gt 0 || usage
+
+touch "$@"
+
+sha1=$(git hash-object -t blob -w --stdin </dev/null)
+
+git ls-files --others -- "$@" |
+while read -r file
+do
+	name=$(git ls-files --full-name --others -- "$file")
+	mode=$(stat -c %a -- "$file")
+	printf "100%s %s\t%s\n" "$mode" "$sha1" "$name"
+done |
+git update-index --index-info
