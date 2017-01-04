@@ -1,8 +1,9 @@
 # ~/.bash_aliases
 
 # ls
-alias ll='ls -l  --color=auto'
-alias la='ls -la --color=auto'
+alias ls='ls --color=auto --group-directories-first'
+alias ll='ls -l'
+alias la='ls -la'
 
 alias tree='tree -C'
 
