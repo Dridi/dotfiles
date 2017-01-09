@@ -164,6 +164,7 @@ nmap <leader>g :!clear && gradle --daemon build<CR>
 "
 " Syntastic
 "
+let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_java_javac_config_file_enabled = 1
 
@@ -206,7 +207,7 @@ endif
 "
 call plug#begin('~/.vim/plugged')
 
-Plug 'scrooloose/syntastic', { 'tag': '3.6.0' }
+Plug 'scrooloose/syntastic', { 'tag': '3.8.0' }
 Plug 'bronson/vim-visual-star-search'
 Plug 'airblade/vim-gitgutter'
 
