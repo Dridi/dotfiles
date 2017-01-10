@@ -21,4 +21,5 @@ MiscMiddleClickOpensUri=FALSE
 MiscDefaultWorkingDir=
 MiscRewrapOnResize=TRUE
 MiscUseShiftArrowsToScroll=FALSE
+ShortcutsNoHelpkey=TRUE
 
