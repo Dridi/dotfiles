@@ -1,12 +1,10 @@
 name: cashpack
-root: ~/src/cashpack
+root: ~/src/cashpack/build
 
 windows:
-  - editor:
+  - build:
       layout: main-horizontal
       panes:
-        - vim -c :vsplit $(git ls-files '*.[ch]')
+        - vim -c :vsplit $(git ls-files '../*.[ch]' '../*.[ch].in')
         - cmake:
-          - mkdir -p build
-          - cd build
           - git status
