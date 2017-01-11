@@ -4,9 +4,9 @@ set -e
 
 usage() {
 	cat >&2 <<-EOF
-		git-touch - Add empty files to the index
+	git-touch - Add empty files to the index
 
-		usage: git touch <file>...
+	usage: git touch <file>...
 	EOF
 	return 1
 }
