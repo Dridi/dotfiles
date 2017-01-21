@@ -184,13 +184,23 @@ au BufEnter,BufWinEnter *  match OverLength     /\%>78v.\+/
 au BufEnter,BufWinEnter * 2match TrailingSpaces /\v\s+$/
 
 "
+" background
+"
+function! ToggleBackground()
+  if &bg ==# "light"
+    set bg=dark
+  else
+    set bg=light
+  endif
+endfunction
+
+set background=dark
+nnoremap <leader>b :call ToggleBackground()<CR>
+
+"
 " tmux
 "
-
 if &term =~ '^screen'
-  " Color scheme
-  set background=dark
-
   " Page keys
   execute "set t_kP=\e[5;*~"
   execute "set t_kN=\e[6;*~"
