@@ -217,6 +217,7 @@ endif
 " neovim
 "
 set mouse=
+set noincsearch
 
 if has("termguicolors")
   set termguicolors
