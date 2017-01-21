@@ -213,6 +213,15 @@ if &term =~ '^screen'
 endif
 
 "
+" neovim
+"
+set mouse=
+
+if has("termguicolors")
+  set termguicolors
+endif
+
+"
 " vim plug
 "
 call plug#begin('~/.vim/plugged')
