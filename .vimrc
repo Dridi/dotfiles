@@ -72,6 +72,7 @@ if has("autocmd")
   autocmd BufNewFile,BufRead *.md set filetype=markdown
   autocmd BufNewFile,BufRead *.vcl set filetype=perl
   autocmd BufNewFile,BufRead *.vtc set filetype=perl
+  autocmd BufNewFile,BufRead *.vcc set filetype=rst
   autocmd BufNewFile,BufRead *.jelly set filetype=xml
   autocmd BufNewFile,BufRead *.gradle set filetype=groovy
 endif
