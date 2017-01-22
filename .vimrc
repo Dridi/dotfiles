@@ -9,7 +9,7 @@ let mapleader=','
 nmap <leader>v :tabedit $MYVIMRC<CR>
 
 if has("autocmd")
-  autocmd bufwritepost .vimrc source $MYVIMRC
+  autocmd bufwritepost $MYVIMRC source $MYVIMRC
 endif
 
 "
@@ -218,6 +218,7 @@ endif
 "
 set mouse=
 set noincsearch
+set ruler
 
 if has("termguicolors")
   set termguicolors
