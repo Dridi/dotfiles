@@ -1,33 +1,80 @@
 "
-" Leader key
+" Defaults
 "
 let mapleader=','
 
+set autoindent
+set autoread
+set background=dark
+set backspace=eol,indent,start
+set backupdir=~/.local/share/nvim/backup,.
+set complete=.,b,t,w
+set directory=~/.local/share/nvim/swap//
+set display=lastline
+set formatoptions=coqrt
+set history=10000
+set hlsearch
+set laststatus=2
+set listchars=eol:¬,tab:▸·
+set mouse=
+set nrformats=bin,hex
+set number
+set ruler
+set ttyfast
+set undodir=~/.local/share/nvim/undo
+
+set noincsearch
+set nolangnoremap
+set nolist
+set nopaste
+set nosmarttab
+
+if has('nvim')
+  set termguicolors
+endif
+
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_java_javac_config_file_enabled = 1
+
 "
-" .vimrc
+" Mappings
 "
+nmap <C-D> :bn<bar>bd#<CR>
+
+nmap <leader>b :call ToggleBackground()<CR>
+nmap <leader>c :call ToggleAutoComment()<CR>
+nmap <leader>g :!clear && gradle --daemon build<CR>
+nmap <leader>h :call ToggleHardWrapping()<CR>
+nmap <leader>i :set paste!<CR>
+nmap <leader>l :set list!<CR>
+nmap <leader>s :set spell!<CR>
 nmap <leader>v :tabedit $MYVIMRC<CR>
 
+"
+" MYVIMRC
+"
 if has("autocmd")
   autocmd bufwritepost $MYVIMRC source $MYVIMRC
 endif
 
 "
-" Line numbers
+" Custom file types
 "
-set number
+if has("autocmd")
+  filetype on
 
-"
-" Invisible characters
-"
-nmap <leader>l :set list!<CR>
-set listchars=tab:▸·,eol:¬
+  autocmd BufNewFile,BufRead *.md     set filetype=markdown
+  autocmd BufNewFile,BufRead *.vcl    set filetype=perl
+  autocmd BufNewFile,BufRead *.vtc    set filetype=perl
+  autocmd BufNewFile,BufRead *.vcc    set filetype=rst
+  autocmd BufNewFile,BufRead *.jelly  set filetype=xml
+  autocmd BufNewFile,BufRead *.gradle set filetype=groovy
+endif
 
 "
 " Indentation
 "
-set ai
-nmap <silent> <leader>i :set ai!<CR>
 command! -nargs=* Stab call Stab()
 function! Stab()
   let l:tabstop = 1 * input('set tabstop = softtabstop = shiftwidth = ')
@@ -68,20 +115,11 @@ if has("autocmd")
   autocmd FileType svg  setlocal ts=2 sts=2 sw=2 expandtab
   autocmd FileType css  setlocal ts=2 sts=2 sw=2 expandtab
   autocmd FileType vim  setlocal ts=2 sts=2 sw=2 expandtab
-
-  autocmd BufNewFile,BufRead *.md set filetype=markdown
-  autocmd BufNewFile,BufRead *.vcl set filetype=perl
-  autocmd BufNewFile,BufRead *.vtc set filetype=perl
-  autocmd BufNewFile,BufRead *.vcc set filetype=rst
-  autocmd BufNewFile,BufRead *.jelly set filetype=xml
-  autocmd BufNewFile,BufRead *.gradle set filetype=groovy
 endif
 
 "
 " Automatic comments
 "
-set fo-=ro
-nmap <leader>c :call ToggleAutoComment()<CR>
 function! ToggleAutoComment()
   try
     if &fo =~ "o"
@@ -120,11 +158,6 @@ function! SummarizeAutoComment()
 endfunction
 
 "
-" Spelling
-"
-nmap <silent> <leader>s :set spell!<CR>
-
-"
 " Hard wrapping
 "
 let b:hardwrapping=0
@@ -158,23 +191,6 @@ function! SummarizeHardWrapping()
 endfunction
 
 "
-" Gradle
-"
-nmap <leader>g :!clear && gradle --daemon build<CR>
-
-"
-" Syntastic
-"
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_java_javac_config_file_enabled = 1
-
-"
-" :bdelete replacement
-"
-nmap <C-D> :bn<bar>bd#<CR>
-
-"
 " long lines hunt
 "
 highlight OverLength ctermbg=red ctermfg=white
@@ -194,11 +210,8 @@ function! ToggleBackground()
   endif
 endfunction
 
-set background=dark
-nnoremap <leader>b :call ToggleBackground()<CR>
-
 "
-" tmux
+" tmux vs vim
 "
 if &term =~ '^screen'
   " Page keys
@@ -210,17 +223,6 @@ if &term =~ '^screen'
   execute "set <xDown>=\e[1;*B"
   execute "set <xRight>=\e[1;*C"
   execute "set <xLeft>=\e[1;*D"
-endif
-
-"
-" neovim
-"
-set mouse=
-set noincsearch
-set ruler
-
-if &term ==# 'nvim'
-  set termguicolors
 endif
 
 "
