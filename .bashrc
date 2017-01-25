@@ -30,7 +30,7 @@ export GIT_EXEC_PATH=~/.config/git/libexec:"$(GIT_EXEC_PATH= git --exec-path)"
 
 source_if_exists /usr/share/git-core/contrib/completion/git-prompt.sh
 
-if type __git_ps1 >/dev/null 2>&1
+if command -v __git_ps1 >/dev/null
 then
 	PS1='\[\033[38m\]\u@\h\[\033[01;34m\] \w \[\033[31m\]$(__git_ps1 "(%s)")\[\033[00m\]$ '
 
