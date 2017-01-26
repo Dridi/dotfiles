@@ -46,10 +46,11 @@ nmap <leader>b :call ToggleBackground()<CR>
 nmap <leader>c :call ToggleAutoComment()<CR>
 nmap <leader>g :!clear && gradle --daemon build<CR>
 nmap <leader>h :call ToggleHardWrapping()<CR>
-nmap <leader>i :set paste!<CR>
-nmap <leader>l :set list!<CR>
-nmap <leader>s :set spell!<CR>
 nmap <leader>v :tabedit $MYVIMRC<CR>
+
+nmap <silent> <leader>i :set paste!<CR>:echo 'auto indentation:' &paste<CR>
+nmap <silent> <leader>l :set list!<CR>
+nmap <silent> <leader>s :set spell!<CR>:echo 'spelling:' &spell<CR>
 
 "
 " MYVIMRC
