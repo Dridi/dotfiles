@@ -60,6 +60,15 @@ if has("autocmd")
 endif
 
 "
+" vi OCD
+"
+if has('nvim')
+  autocmd InsertLeave * :normal `^
+else
+  inoremap <silent> <Esc> <Esc>`^
+endif
+
+"
 " Custom file types
 "
 if has("autocmd")
