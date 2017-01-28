@@ -56,7 +56,8 @@ nmap <silent> <leader>s :set spell!<CR>:echo 'spelling:' &spell<CR>
 " MYVIMRC
 "
 if has("autocmd")
-  autocmd bufwritepost $MYVIMRC source $MYVIMRC
+  autocmd! BufWritePost $MYVIMRC
+  autocmd  BufWritePost $MYVIMRC source $MYVIMRC
 endif
 
 "
