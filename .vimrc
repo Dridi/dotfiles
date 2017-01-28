@@ -8,7 +8,7 @@ set autoread
 set background=dark
 set backspace=eol,indent,start
 set backupdir=~/.local/share/nvim/backup,.
-set complete=.,b,t,w
+set complete=.,b,i,t,w
 set directory=~/.local/share/nvim/swap//
 set display=lastline
 set formatoptions=coqrt
