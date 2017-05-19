@@ -1,0 +1,45 @@
+#!/bin/sh
+
+set -e
+set -u
+
+usage() {
+	cat >&2 <<-EOF
+	git-abort - Abort an ongoing operation
+
+	usage: git abort
+
+	Supported operations:
+
+	- bisect
+	- cherry-pick
+	- merge
+	- rebase
+	- revert
+	EOF
+	return 1
+}
+
+test $# -gt 0 && usage
+
+gitdir=$(git rev-parse --git-dir)
+
+if [ -f "$gitdir/BISECT_LOG" ]
+then
+	git bisect reset
+elif [ -f "$gitdir/CHERRY_PICK_HEAD" ]
+then
+	git cherry-pick --abort
+elif [ -f "$gitdir/MERGE_HEAD" ]
+then
+	git merge --abort
+elif [ -d "$gitdir/rebase-merge" ] || [ -d "$gitdir/rebase-apply" ]
+then
+	git rebase --abort
+elif [ -f "$gitdir/REVERT_HEAD" ]
+then
+	git revert --abort
+else
+	echo "git-abort: unsupported state, aborting." >&2
+	exit 1
+fi
