@@ -30,10 +30,10 @@
 	rp = reset -p
 	cop = checkout -p
 
-	ulog = !git log `git upstream`..
+	ulog = !git log `git upstream`...
 	wtfchanged = log --stat --find-renames --pretty=format:\"%C(yellow)%h%C(cyan)%d%C(reset) (%ar - %C(red)%an%C(reset)) %n%B\"
 	hist = log --graph --date=short --pretty=format:\"%C(yellow)%h %C(green)%ad%C(reset) |%C(cyan)%d%C(reset) %s (%C(red)%an%C(reset))\"
-	uhist = !git hist `git upstream`..
+	uhist = !git hist `git upstream`...
 	sdiff = diff --staged
 	cdiff = diff --cached --find-renames
 	udiff = !git diff `git upstream`..
