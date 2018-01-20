@@ -8,17 +8,22 @@ OPTIONS_STUCKLONG=yes
 OPTIONS_SPEC="\
 git tree [-d]
 --
- Available options are
+ Listing options
+a,all!             all files are printed
 d,directory-only!  list directories only
 "
 . git-sh-setup
 require_work_tree_exists
 
 match_type='blob|tree'
+match_name='^[^.]'
 
 while test $# != 0
 do
 	case "$1" in
+	--all)
+		match_name=.
+		;;
 	--directory-only)
 		match_type=tree
 		;;
@@ -58,7 +63,9 @@ tree_walk() {
 
 tree() {
 	git ls-tree "$1" |
-	awk '$2 ~ match_type' match_type="$match_type" |
+	awk '$2 ~ match_type && $4 ~ match_name' \
+		match_type="$match_type" \
+		match_name="$match_name" |
 	tree_walk "$2"
 }
 
