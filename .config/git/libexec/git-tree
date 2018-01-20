@@ -6,12 +6,13 @@ SUBDIRECTORY_OK=yes
 OPTIONS_KEEPDASHDASH=yes
 OPTIONS_STUCKLONG=yes
 OPTIONS_SPEC="\
-git tree [-d]
+git tree [-adf] [-L level]
 --
  Listing options
 a,all!             all files are printed
 d,directory-only!  list directories only
-f,full-path        print the full path prefix for each file
+f,full-path!       print the full path prefix for each file
+L,level=           descend only <level> directories deep
 "
 . git-sh-setup
 require_work_tree_exists
@@ -19,6 +20,7 @@ require_work_tree_exists
 match_type='blob|tree'
 match_name='^[^.]'
 print_name=base
+max_level=
 
 while test $# != 0
 do
@@ -32,6 +34,9 @@ do
 	--full-path)
 		print_name=full
 		;;
+	--level=*)
+		max_level=${1#--level=}
+		;;
 	--)
 		shift
 		break
@@ -41,6 +46,13 @@ do
 done
 
 [ $# -gt 0 ] && usage
+
+within_max_level() {
+	test -n "$max_level" || return 0
+
+	current_level=$(printf '%s' "$1" | tr '/' '\n' | wc -l)
+	test "$current_level" -lt "$max_level"
+}
 
 tree_print() {
 	if [ "$print_name" = full ]
@@ -73,6 +85,7 @@ tree_walk() {
 }
 
 tree() {
+	within_max_level "$1" || return 0
 	git ls-tree "$2" |
 	awk '$2 ~ match_type && $4 ~ match_name' \
 		match_type="$match_type" \
