@@ -61,6 +61,27 @@ then
 	die "$(eval_gettext "fatal: not a tree object: \$root_tree")"
 fi
 
+tree_color() {
+	git config --get-color color.tree."$1" "$2"
+}
+
+color_dir=
+color_file=
+color_link=
+color_exec=
+color_line=
+color_reset=
+
+if test -t 1
+then
+	color_dir=$(tree_color directory blue)
+	color_file=$(tree_color file white)
+	color_link=$(tree_color link yellow)
+	color_exec=$(tree_color executable green)
+	color_line=$(tree_color line 'white bold')
+	color_reset=$(git config --get-color '' reset)
+fi
+
 within_max_level() {
 	test -n "$max_level" || return 0
 
@@ -68,34 +89,47 @@ within_max_level() {
 	test "$current_level" -lt "$max_level"
 }
 
+tree_print_colored() {
+	case $1 in
+	040000) color=$color_dir ;;
+	100644) color=$color_file ;;
+	120000) color=$color_link ;;
+	100755) color=$color_exec ;;
+	line)   color=$color_line ;;
+	*)      color= ;;
+	esac
+	printf '%s%s%s' "$color" "$2" "$color_reset"
+}
+
 tree_print() {
 	if [ "$print_name" = full ]
 	then
-		file_name="$1/$3"
+		file_name="$1/$6"
 	else
-		file_name=$3
+		file_name=$6
 	fi
 	printf '\n'
-	printf '%s' "$2"
-	printf ' %s' "$file_name"
+	tree_print_colored line "$2"
+	tree_print_colored "$3" " $file_name"
 	if [ "$4" = tree ]
 	then
-		tree "$1/$3" "$5" "${2%???}|   |--"
+		tree "$1/$6" "$5" "${2%???}|   |--"
 	fi
 }
 
 tree_walk() {
 	read -r mode type hash name || return 0
 
-	while read -r mode next_type next_hash next_name
+	while read -r next_mode next_type next_hash next_name
 	do
-		tree_print "$1" "$2" "$name" "$type" "$hash"
+		tree_print "$1" "$2" "$mode" "$type" "$hash" "$name"
+		mode=$next_mode
 		type=$next_type
 		hash=$next_hash
 		name=$next_name
 	done
 
-	tree_print "$1" "${2%|--}'--" "$name" "$type" "$hash"
+	tree_print "$1" "${2%???}'--" "$mode" "$type" "$hash" "$name"
 }
 
 tree() {
@@ -108,7 +142,7 @@ tree() {
 }
 
 {
-	printf .
+	tree_print_colored 040000 .
 	tree . "$root_tree" '|--'
 	printf '\n'
 } |
