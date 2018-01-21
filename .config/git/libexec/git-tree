@@ -108,9 +108,16 @@ tree_print() {
 	else
 		file_name=$6
 	fi
+
 	printf '\n'
 	tree_print_colored line "$2"
 	tree_print_colored "$3" " $file_name"
+
+	if [ "$3" = 120000 ]
+	then
+		tree_print_colored "$3" " -> $(git cat-file blob "$5")"
+	fi
+
 	if [ "$4" = tree ]
 	then
 		tree "$1/$6" "$5" "${2%???}|   |--"
