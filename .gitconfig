@@ -53,9 +53,9 @@
 	git = !git
 
 	upstream = rev-parse --abbrev-ref --symbolic-full-name @{u}
-	update = !git fe && git ff
-	rework = !git rb -i `git upstream`
 	review = !git ulog -p --reverse
+	rework = rebase -i --fork-point
+	rework-dates = rebase --fork-point -x 'git fixup-date'
 	start = !git init && git ci --allow-empty -m\"Initial commit\"
 
 [user]
