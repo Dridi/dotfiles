@@ -6,7 +6,7 @@ SUBDIRECTORY_OK=yes
 OPTIONS_KEEPDASHDASH=yes
 OPTIONS_STUCKLONG=yes
 OPTIONS_SPEC="\
-git tree [-adf] [-L level]
+git tree [-adf] [-L level] [<tree-ish>]
 --
  Listing options
 a,all!             all files are printed
@@ -21,6 +21,7 @@ match_type='blob|tree'
 match_name='^[^.]'
 print_name=base
 max_level=
+root_tree=HEAD
 
 while test $# != 0
 do
@@ -45,7 +46,20 @@ do
 	shift
 done
 
+if [ $# -gt 0 ]
+then
+	root_tree=$1
+	shift
+fi
+
 [ $# -gt 0 ] && usage
+
+root_type=$(git cat-file -t "$root_tree")
+
+if [ "$root_type" != tree ] && [ "$root_type" != commit ]
+then
+	die "$(eval_gettext "fatal: not a tree object: \$root_tree")"
+fi
 
 within_max_level() {
 	test -n "$max_level" || return 0
@@ -95,7 +109,7 @@ tree() {
 
 {
 	printf .
-	tree . HEAD '|--'
+	tree . "$root_tree" '|--'
 	printf '\n'
 } |
 git_pager
