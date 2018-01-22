@@ -6,13 +6,14 @@ SUBDIRECTORY_OK=yes
 OPTIONS_KEEPDASHDASH=yes
 OPTIONS_STUCKLONG=yes
 OPTIONS_SPEC="\
-git tree [-adf] [-L level] [<tree-ish>]
+git tree [-adf] [-L level] [--charset charset] [<tree-ish>]
 --
  Listing options
 a,all!             all files are printed
 d,directory-only!  list directories only
 f,full-path!       print the full path prefix for each file
 L,level=           descend only <level> directories deep
+charset=           use charset for terminal indentation lines
 "
 . git-sh-setup
 require_work_tree_exists
@@ -22,12 +23,16 @@ match_name='^[^.]'
 print_name=base
 max_level=
 root_tree=HEAD
+charmap=$(locale charmap)
 
 while test $# != 0
 do
 	case "$1" in
 	--all)
 		match_name=.
+		;;
+	--charset=*)
+		charmap=${1#--charset=}
 		;;
 	--directory-only)
 		match_type=tree
@@ -61,6 +66,21 @@ then
 	die "$(eval_gettext "fatal: not a tree object: \$root_tree")"
 fi
 
+case $charmap in
+UTF-8|UTF8|utf-8|utf8)
+	line_bar=│
+	line_entry=├
+	line_last=└
+	line_dash=─
+	;;
+*)
+	line_bar='|'
+	line_entry='|'
+	line_last="'"
+	line_dash=-
+	;;
+esac
+
 tree_color() {
 	git config --get-color color.tree."$1" "$2"
 }
@@ -78,7 +98,7 @@ then
 	color_file=$(tree_color file white)
 	color_link=$(tree_color link yellow)
 	color_exec=$(tree_color executable green)
-	color_line=$(tree_color line 'white bold')
+	color_line=$(tree_color line white)
 	color_reset=$(git config --get-color '' reset)
 fi
 
@@ -110,7 +130,18 @@ tree_print() {
 	fi
 
 	printf '\n'
-	tree_print_colored line "$2"
+
+	# GNU tr doesn't support multi-byte characters...
+	line_prefix=$(
+		printf '%s' "$2" |
+		sed "
+			s/[|]/$line_bar/g
+			s/[+]/$line_entry/g
+			s/[']/$line_last/g
+			s/[-]/$line_dash/g
+		"
+	)
+	tree_print_colored line "$line_prefix"
 	tree_print_colored "$3" " $file_name"
 
 	if [ "$3" = 120000 ]
@@ -122,9 +153,9 @@ tree_print() {
 	then
 		if [ "$2" != "${2%\'--}" ]
 		then
-			lines="${2%???}    |--"
+			lines="${2%???}    +--"
 		else
-			lines="${2%???}|   |--"
+			lines="${2%???}|   +--"
 		fi
 		tree "$1/$6" "$5" "$lines"
 	fi
@@ -156,7 +187,7 @@ tree() {
 
 {
 	tree_print_colored 040000 .
-	tree . "$root_tree" '|--'
+	tree . "$root_tree" '+--'
 	printf '\n'
 } |
 git_pager
