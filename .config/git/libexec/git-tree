@@ -120,7 +120,13 @@ tree_print() {
 
 	if [ "$4" = tree ]
 	then
-		tree "$1/$6" "$5" "${2%???}|   |--"
+		if [ "$2" != "${2%\'--}" ]
+		then
+			lines="${2%???}    |--"
+		else
+			lines="${2%???}|   |--"
+		fi
+		tree "$1/$6" "$5" "$lines"
 	fi
 }
 
