@@ -4,15 +4,14 @@ set -e
 
 SUBDIRECTORY_OK=yes
 OPTIONS_KEEPDASHDASH=yes
-OPTIONS_STUCKLONG=yes
 OPTIONS_SPEC="\
-git tree [-adf] [-L level] [--charset charset] [--noreport] [<tree-ish>]
+git tree [-adfnC] [-L level] [--charset charset] [--noreport] [<tree-ish>]
 --
  Listing options
-a,all!             all files are printed
-d,directory-only!  list directories only
-f,full-path!       print the full path prefix for each file
-L,level=           descend only <level> directories deep
+a!                 all files are printed
+d!                 list directories only
+f!                 print the full path prefix for each file
+L=                 descend only <level> directories deep
 charset=           use <charset> for terminal indentation lines
 noreport!          turn off file/directory count at end of tree listing
  Graphics options
@@ -34,26 +33,27 @@ colors=
 while test $# != 0
 do
 	case "$1" in
-	--all)
+	-a)
 		match_name=.
+		;;
+	-d)
+		# XXX: do `git ls-tree -d` instead
+		match_type=tree
+		;;
+	-f)
+		print_name=full
+		;;
+	-n)
+		test "$colors" = always || colors=no
 		;;
 	-C)
 		colors=always
 		;;
-	--charset=*)
-		charmap=${1#--charset=}
-		;;
-	--directory-only)
-		match_type=tree
-		;;
-	--full-path)
-		print_name=full
-		;;
-	--level=*)
+	-L=*)
 		max_level=${1#--level=}
 		;;
-	-n)
-		test "$colors" = always || colors=no
+	--charset=*)
+		charmap=${1#--charset=}
 		;;
 	--noreport)
 		noreport=yes
