@@ -13,7 +13,7 @@ a,all!             all files are printed
 d,directory-only!  list directories only
 f,full-path!       print the full path prefix for each file
 L,level=           descend only <level> directories deep
-charset=           use charset for terminal indentation lines
+charset=           use <charset> for terminal indentation lines
 "
 . git-sh-setup
 require_work_tree_exists
@@ -68,16 +68,16 @@ fi
 
 case $charmap in
 UTF-8|UTF8|utf-8|utf8)
-	line_bar=│
-	line_entry=├
+	line_vbar=│
+	line_file=├
 	line_last=└
-	line_dash=─
+	line_hbar=─
 	;;
 *)
-	line_bar='|'
-	line_entry='|'
+	line_vbar='|'
+	line_file='|'
 	line_last="'"
-	line_dash=-
+	line_hbar=-
 	;;
 esac
 
@@ -135,10 +135,10 @@ tree_print() {
 	line_prefix=$(
 		printf '%s' "$2" |
 		sed "
-			s/[|]/$line_bar/g
-			s/[+]/$line_entry/g
+			s/[|]/$line_vbar/g
+			s/[+]/$line_file/g
 			s/[']/$line_last/g
-			s/[-]/$line_dash/g
+			s/[-]/$line_hbar/g
 		"
 	)
 	tree_print_colored line "$line_prefix"
