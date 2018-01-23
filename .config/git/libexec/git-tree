@@ -15,6 +15,9 @@ f,full-path!       print the full path prefix for each file
 L,level=           descend only <level> directories deep
 charset=           use <charset> for terminal indentation lines
 noreport!          turn off file/directory count at end of tree listing
+ Graphics options
+n!                 turn colorization off always, over-ridden by -C
+C!                 turn colorization on always
 "
 . git-sh-setup
 require_work_tree_exists
@@ -26,12 +29,16 @@ max_level=
 root_tree=HEAD
 charmap=$(locale charmap)
 noreport=
+colors=
 
 while test $# != 0
 do
 	case "$1" in
 	--all)
 		match_name=.
+		;;
+	-C)
+		colors=always
 		;;
 	--charset=*)
 		charmap=${1#--charset=}
@@ -44,6 +51,9 @@ do
 		;;
 	--level=*)
 		max_level=${1#--level=}
+		;;
+	-n)
+		test "$colors" = always || colors=no
 		;;
 	--noreport)
 		noreport=yes
@@ -103,7 +113,7 @@ color_exec=
 color_line=
 color_reset=
 
-if test -t 1
+if ([ -t 1 ] || [ "$colors" = always ]) && [ "$colors" != no ]
 then
 	color_dir=$(tree_color directory blue)
 	color_file=$(tree_color file white)
