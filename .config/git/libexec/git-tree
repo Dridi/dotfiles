@@ -78,6 +78,12 @@ UTF-8|UTF8|utf-8|utf8)
 	line_last=└
 	line_hbar=─
 	;;
+CP437|IBM437|cp437|ibm437)
+	line_vbar="\xb3"
+	line_file="\xc3"
+	line_last="\xc0"
+	line_hbar="\xc4"
+	;;
 *)
 	line_vbar='|'
 	line_file='|'
