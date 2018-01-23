@@ -5,7 +5,7 @@ set -e
 SUBDIRECTORY_OK=yes
 OPTIONS_KEEPDASHDASH=yes
 OPTIONS_SPEC="\
-git tree [-adfnC] [-L level] [--charset charset] [--noreport] [<tree-ish>]
+git tree [-adfinC] [-L level] [--charset charset] [--noreport] [<tree-ish>]
 --
  Listing options
 a!                 all files are printed
@@ -15,6 +15,7 @@ L=                 descend only <level> directories deep
 charset=           use <charset> for terminal indentation lines
 noreport!          turn off file/directory count at end of tree listing
  Graphics options
+i!                 don't print indentation lines
 n!                 turn colorization off always, over-ridden by -C
 C!                 turn colorization on always
 "
@@ -29,6 +30,7 @@ root_tree=HEAD
 charmap=$(locale charmap)
 noreport=
 colors=
+no_lines=
 
 while test $# != 0
 do
@@ -42,6 +44,9 @@ do
 		;;
 	-f)
 		print_name=full
+		;;
+	-i)
+		no_lines=yes
 		;;
 	-n)
 		test "$colors" = always || colors=no
@@ -152,18 +157,22 @@ tree_print() {
 
 	printf '\n%s\n' "$4"
 
-	# GNU tr doesn't support multi-byte characters...
-	line_prefix=$(
-		printf '%s' "$2" |
-		sed "
-			s/[|]/$line_vbar/g
-			s/[+]/$line_file/g
-			s/[']/$line_last/g
-			s/[-]/$line_hbar/g
-		"
-	)
-	tree_print_colored line "$line_prefix"
-	tree_print_colored "$3" " $file_name"
+	if [ -z "$no_lines" ]
+	then
+		# GNU tr doesn't support multi-byte characters...
+		line_prefix=$(
+			printf '%s' "$2" |
+			sed "
+				s/[|]/$line_vbar/g
+				s/[+]/$line_file/g
+				s/[']/$line_last/g
+				s/[-]/$line_hbar/g
+			"
+		)
+		tree_print_colored line "$line_prefix"
+		printf ' '
+	fi
+	tree_print_colored "$3" "$file_name"
 
 	if [ "$3" = 120000 ]
 	then
@@ -207,7 +216,7 @@ tree() {
 }
 
 [ -n "$noreport" ] ||
-awk_print_report='END { print "\n\n" tree " directories, " blob " files" }'
+awk_print_report='END { print "\n" tree " directories, " blob " files" }'
 
 {
 	tree_print_colored 040000 .
