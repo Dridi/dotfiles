@@ -6,7 +6,7 @@ SUBDIRECTORY_OK=yes
 OPTIONS_KEEPDASHDASH=yes
 OPTIONS_STUCKLONG=yes
 OPTIONS_SPEC="\
-git tree [-adf] [-L level] [--charset charset] [<tree-ish>]
+git tree [-adf] [-L level] [--charset charset] [--noreport] [<tree-ish>]
 --
  Listing options
 a,all!             all files are printed
@@ -14,6 +14,7 @@ d,directory-only!  list directories only
 f,full-path!       print the full path prefix for each file
 L,level=           descend only <level> directories deep
 charset=           use <charset> for terminal indentation lines
+noreport!          turn off file/directory count at end of tree listing
 "
 . git-sh-setup
 require_work_tree_exists
@@ -24,6 +25,7 @@ print_name=base
 max_level=
 root_tree=HEAD
 charmap=$(locale charmap)
+noreport=
 
 while test $# != 0
 do
@@ -42,6 +44,9 @@ do
 		;;
 	--level=*)
 		max_level=${1#--level=}
+		;;
+	--noreport)
+		noreport=yes
 		;;
 	--)
 		shift
@@ -129,7 +134,7 @@ tree_print() {
 		file_name=$6
 	fi
 
-	printf '\n'
+	printf '\n%s\n' "$4"
 
 	# GNU tr doesn't support multi-byte characters...
 	line_prefix=$(
@@ -185,9 +190,18 @@ tree() {
 	tree_walk "$1" "$3"
 }
 
+[ -n "$noreport" ] ||
+awk_print_report='END { print "\n\n" tree " directories, " blob " files" }'
+
 {
 	tree_print_colored 040000 .
-	tree . "$root_tree" '+--'
-	printf '\n'
+	tree . "$root_tree" '+--' |
+	awk '
+		BEGIN { blob=0; tree=0 }
+		$1 == "blob" { blob++ }
+		$1 == "tree" { tree++ }
+		$1 !~ "blob|tree" { print }
+		'"$awk_print_report"'
+	'
 } |
 git_pager
