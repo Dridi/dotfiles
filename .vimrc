@@ -75,6 +75,7 @@ endif
 if has("autocmd")
   filetype on
 
+  autocmd BufNewFile,BufRead *.am     set filetype=automake
   autocmd BufNewFile,BufRead *.md     set filetype=markdown
   autocmd BufNewFile,BufRead *.vcl    set filetype=perl
   autocmd BufNewFile,BufRead *.vtc    set filetype=perl
