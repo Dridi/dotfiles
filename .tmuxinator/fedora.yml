@@ -24,6 +24,6 @@ windows:
       layout: main-horizontal
       root: ~/fedora/<%= "#{pkg}" %>
       panes:
-        - vim <%= "#{pkg}" %>.spec
+        - nvim <%= "#{pkg}" %>.spec
         - git status
 <% end %>

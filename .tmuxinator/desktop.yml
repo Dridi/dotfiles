@@ -3,7 +3,7 @@ root: ~
 
 windows:
   - desktop:
-      layout: main-horizontal
+      layout: horizontal
       panes:
         - bluetooth:
           - bluetoothctl

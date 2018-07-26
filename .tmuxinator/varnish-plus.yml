@@ -12,22 +12,7 @@ windows:
       layout: main-horizontal
       root: ~/varnish/src/<%= "#{pkg}" %>
       panes:
-        - vim -c :vsplit $(git ls-files '*.[ch]')
-        - git status
-<% end %>
-
-<% for vmod in [
-        'acl',
-        'cowsay',
-        'hashtwo',
-        'kvstore',
-        'utf8',
-] %>
-  - <%= "#{vmod}" %>:
-      layout: main-horizontal
-      root: ~/varnish/src/libvmod-<%= "#{vmod}" %>
-      panes:
-        - vim -c :vsplit src/*.vcc $(git ls-files '*.[ch]')
+        - nvim -c :vsplit $(git ls-files '*.[ch]')
         - git status
 <% end %>
 
@@ -35,9 +20,7 @@ windows:
         'pkg-varnish-plus',
         'spiros',
         'varnish-tuner',
-        'docker',
         'customer-reports',
-        'blog',
 ] %>
   - <%= "#{misc}" %>:
       root: ~/varnish/src/<%= "#{misc}" %>
