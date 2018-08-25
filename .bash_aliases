@@ -47,5 +47,15 @@ crc32() {
 	done
 }
 
+download() {
+	ff_ver=$(
+		firefox -version |
+		tr ' ' '\n' |
+		awk -F. '$1 ~ "[0-9]+" {print $1 "." $2}'
+	)
+	ff_ua="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:$ff_ver) Gecko/20100101 Firefox/$ff_ver"
+	wget --user-agent="$ff_ua" "$@"
+}
+
 # X11
 alias xfix="xset s 0 0 dpms 0 0 0"
