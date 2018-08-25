@@ -26,7 +26,7 @@ export EDITOR=vim
 export NVIM_TUI_ENABLE_TRUE_COLOR=1
 
 # git
-export GIT_EXEC_PATH=~/.config/git/libexec:"$(GIT_EXEC_PATH= git --exec-path)"
+PATH=~/.config/git/libexec:"$PATH"
 
 source_if_exists /usr/share/git-core/contrib/completion/git-prompt.sh
 
