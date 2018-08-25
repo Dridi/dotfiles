@@ -58,6 +58,8 @@
 	rework-dates = rebase --fork-point -x 'git fixup-date'
 	start = !git init && git ci --allow-empty -m\"Initial commit\"
 
+	github-config-pull = config --local --add remote.origin.fetch '+refs/pull/*/head:refs/remotes/origin/pull/*'
+
 [user]
 	name = Dridi Boukelmoune
 	email = dridi.boukelmoune@gmail.com
