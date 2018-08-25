@@ -67,3 +67,6 @@ source_if_exists /usr/share/gems/gems/tmuxinator*/completion/tmuxinator.bash
 
 # X11
 xfix
+
+# vagrant
+export VAGRANT_DEFAULT_PROVIDER=virtualbox
