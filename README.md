@@ -6,6 +6,7 @@ Dotfiles managed by [vcsh](https://github.com/RichiH/vcsh/), the dotfiles actual
 ```
 vcsh clone -b bash git@github.com:Dridi/dotfiles.git bash
 vcsh clone -b git  git@github.com:Dridi/dotfiles.git git
+vcsh clone -b rpm  git@github.com:Dridi/dotfiles.git rpm
 vcsh clone -b tmux git@github.com:Dridi/dotfiles.git tmux
 vcsh clone -b vim  git@github.com:Dridi/dotfiles.git vim
 ```
