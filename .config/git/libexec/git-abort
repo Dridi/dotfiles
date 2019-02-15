@@ -35,7 +35,15 @@ then
 	git merge --abort
 elif [ -d "$gitdir/rebase-merge" ] || [ -d "$gitdir/rebase-apply" ]
 then
-	git rebase --abort
+	if [ -f "$gitdir/rebase-apply/rebasing" ]
+	then
+		git rebase --abort
+	elif [ -f "$gitdir/rebase-apply/applying" ]
+	then
+		git am --abort
+	else
+		git am --abort || git rebase --abort
+	fi
 elif [ -f "$gitdir/REVERT_HEAD" ]
 then
 	git revert --abort
