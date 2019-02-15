@@ -9,6 +9,7 @@
 	changed = yellow
 
 [color "diff"]
+	commit = bold yellow
 	meta = yellow
 
 [alias]
