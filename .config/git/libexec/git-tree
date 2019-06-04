@@ -34,7 +34,7 @@ no_lines=
 
 while test $# != 0
 do
-	case "$1" in
+	case $1 in
 	-a)
 		match_name=.
 		;;
@@ -57,8 +57,16 @@ do
 	-L=*)
 		max_level=${1#--level=}
 		;;
+	-L)
+		max_level=$2
+		shift
+		;;
 	--charset=*)
 		charmap=${1#--charset=}
+		;;
+	--charset)
+		charmap=$2
+		shift
 		;;
 	--noreport)
 		noreport=yes
