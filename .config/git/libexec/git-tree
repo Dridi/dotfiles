@@ -26,7 +26,7 @@ match_type='blob|tree'
 match_name='^[^.]'
 print_name=base
 max_level=
-root_tree=HEAD
+tree_head=HEAD
 charmap=$(locale charmap)
 noreport=
 colors=
@@ -81,17 +81,17 @@ done
 
 if [ $# -gt 0 ]
 then
-	root_tree=$1
+	tree_head=$1
 	shift
 fi
 
 [ $# -gt 0 ] && usage
 
-root_type=$(git cat-file -t "$root_tree")
+root_type=$(git cat-file -t "$tree_head")
 
 if [ "$root_type" != tree ] && [ "$root_type" != commit ]
 then
-	die "$(eval_gettext "fatal: not a tree object: \$root_tree")"
+	die "$(eval_gettext "fatal: not a tree object: \$tree_head")"
 fi
 
 case $charmap in
@@ -228,7 +228,7 @@ awk_print_report='END { print "\n" tree " directories, " blob " files" }'
 
 {
 	tree_print_colored 040000 .
-	tree . "$root_tree" '+--' |
+	tree . "$tree_head" '+--' |
 	awk '
 		BEGIN { blob=0; tree=0 }
 		$1 == "blob" { blob++ }
