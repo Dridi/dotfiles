@@ -5,7 +5,8 @@ set -e
 SUBDIRECTORY_OK=yes
 OPTIONS_KEEPDASHDASH=yes
 OPTIONS_SPEC="\
-git tree [-adfinC] [-L level] [--charset charset] [--noreport] [<tree-ish>]
+git tree [-adfinC] [-L <level>] [--charset <charset>] [--noreport] \
+[<tree-ish>] [--] [<path>]
 --
  Listing options
 a!                 all files are printed
@@ -27,6 +28,7 @@ match_name='^[^.]'
 print_name=base
 max_level=
 tree_head=HEAD
+tree_root=
 charmap=$(locale charmap)
 noreport=
 colors=
@@ -79,9 +81,20 @@ do
 	shift
 done
 
-if [ $# -gt 0 ]
+if [ $# -gt 0 ] && [ "$1" != -- ]
 then
 	tree_head=$1
+	shift
+fi
+
+if [ $# -gt 0 ] && [ "$1" = -- ]
+then
+	shift
+fi
+
+if [ $# -gt 0 ]
+then
+	tree_root=$1
 	shift
 fi
 
@@ -89,7 +102,17 @@ fi
 
 root_type=$(git cat-file -t "$tree_head")
 
-if [ "$root_type" != tree ] && [ "$root_type" != commit ]
+if [ "$root_type" = commit ]
+then
+	tree_head="$tree_head:$tree_root"
+elif [ "$root_type" = tree ]
+then
+	tree_head="$tree_head/$tree_root"
+fi
+
+root_type=$(git cat-file -t "$tree_head")
+
+if [ "$root_type" != tree ]
 then
 	die "$(eval_gettext "fatal: not a tree object: \$tree_head")"
 fi
