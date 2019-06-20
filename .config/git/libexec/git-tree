@@ -14,8 +14,9 @@ d!                 list directories only
 f!                 print the full path prefix for each file
 L=                 descend only <level> directories deep
 charset=           use <charset> for terminal indentation lines
-dirsfirst!         list directories before files
 noreport!          turn off file/directory count at end of tree listing
+ Sorting options
+dirsfirst!         list directories before files
  Graphics options
 i!                 don't print indentation lines
 n!                 turn colorization off always, over-ridden by -C
