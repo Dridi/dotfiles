@@ -5,8 +5,8 @@ set -e
 SUBDIRECTORY_OK=yes
 OPTIONS_KEEPDASHDASH=yes
 OPTIONS_SPEC="\
-git tree [-adfinC] [-L <level>] [--charset <charset>] [--noreport] \
-[<tree-ish>] [--] [<path>]
+git tree [-adfinC] [-L <level>] [--charset <charset>] [--dirsfirst] \
+[--noreport] [<tree-ish>] [--] [<path>]
 --
  Listing options
 a!                 all files are printed
@@ -14,6 +14,7 @@ d!                 list directories only
 f!                 print the full path prefix for each file
 L=                 descend only <level> directories deep
 charset=           use <charset> for terminal indentation lines
+dirsfirst!         list directories before files
 noreport!          turn off file/directory count at end of tree listing
  Graphics options
 i!                 don't print indentation lines
@@ -27,6 +28,7 @@ match_type='blob|tree'
 match_name='^[^.]'
 print_name=base
 max_level=
+sort_mode=
 tree_head=HEAD
 tree_root=
 charmap=$(locale charmap)
@@ -41,7 +43,6 @@ do
 		match_name=.
 		;;
 	-d)
-		# XXX: do `git ls-tree -d` instead
 		match_type=tree
 		;;
 	-f)
@@ -69,6 +70,9 @@ do
 	--charset)
 		charmap=$2
 		shift
+		;;
+	--dirsfirst)
+		sort_mode=dirsfirst
 		;;
 	--noreport)
 		noreport=yes
@@ -159,6 +163,11 @@ then
 	color_reset=$(git config --get-color '' reset)
 fi
 
+case $sort_mode in
+	dirsfirst) alias tree_sort='sort -k 2,2r -k 4,4' ;;
+	*) alias tree_sort=cat ;;
+esac
+
 within_max_level() {
 	test -n "$max_level" || return 0
 
@@ -240,6 +249,7 @@ tree_walk() {
 tree() {
 	within_max_level "$1" || return 0
 	git ls-tree "$2" |
+	tree_sort |
 	awk '$2 ~ match_type && $4 ~ match_name' \
 		match_type="$match_type" \
 		match_name="$match_name" |
