@@ -25,7 +25,7 @@ C!                 turn colorization on always
 . git-sh-setup
 require_work_tree_exists
 
-match_type='blob|tree'
+match_type='blob|tree|commit'
 match_name='^[^.]'
 print_name=base
 max_level=
@@ -44,7 +44,7 @@ do
 		match_name=.
 		;;
 	-d)
-		match_type=tree
+		match_type='tree|commit'
 		;;
 	-f)
 		print_name=full
@@ -148,6 +148,7 @@ tree_color() {
 }
 
 color_dir=
+color_sub=
 color_file=
 color_link=
 color_exec=
@@ -157,6 +158,7 @@ color_reset=
 if ([ -t 1 ] || [ "$colors" = always ]) && [ "$colors" != no ]
 then
 	color_dir=$(tree_color directory 'bold blue')
+	color_sub=$(tree_color submodule 'bold yellow')
 	color_file=$(tree_color file normal)
 	color_link=$(tree_color link yellow)
 	color_exec=$(tree_color executable green)
@@ -179,6 +181,7 @@ within_max_level() {
 tree_print_colored() {
 	case $1 in
 	040000) color=$color_dir ;;
+	160000) color=$color_sub ;;
 	100644) color=$color_file ;;
 	120000) color=$color_link ;;
 	100755) color=$color_exec ;;
@@ -267,7 +270,7 @@ awk_print_report='END { print "\n" tree " directories, " blob " files" }'
 		BEGIN { blob=0; tree=0 }
 		$1 == "blob" { blob++ }
 		$1 == "tree" { tree++ }
-		$1 !~ "blob|tree" { print }
+		$1 !~ "blob|tree|commit" { print }
 		'"$awk_print_report"'
 	'
 } |
