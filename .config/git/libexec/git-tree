@@ -151,11 +151,11 @@ color_reset=
 
 if ([ -t 1 ] || [ "$colors" = always ]) && [ "$colors" != no ]
 then
-	color_dir=$(tree_color directory blue)
-	color_file=$(tree_color file white)
+	color_dir=$(tree_color directory 'bold blue')
+	color_file=$(tree_color file normal)
 	color_link=$(tree_color link yellow)
 	color_exec=$(tree_color executable green)
-	color_line=$(tree_color line white)
+	color_line=$(tree_color line normal)
 	color_reset=$(git config --get-color '' reset)
 fi
 
