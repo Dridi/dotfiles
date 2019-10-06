@@ -1,6 +1,7 @@
 [core]
 	editor = vim
 	excludesfile = ~/.config/git/ignore
+	quotepath = off
 
 [color]
 	ui = auto
