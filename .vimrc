@@ -245,5 +245,6 @@ call plug#begin('~/.vim/plugged')
 Plug 'scrooloose/syntastic', { 'tag': '3.10.0' }
 Plug 'bronson/vim-visual-star-search'
 Plug 'airblade/vim-gitgutter'
+Plug 'lzap/vim-selinux'
 
 call plug#end()
