@@ -130,6 +130,16 @@ if has("autocmd")
 endif
 
 "
+" cscope
+"
+if has("cscope")
+  if filereadable("cscope.out")
+    cscope add cscope.out
+  endif
+  nmap <C-\>s :cscope find s <cword><CR>
+endif
+
+"
 " Automatic comments
 "
 function! ToggleAutoComment()
