@@ -3,6 +3,9 @@
 	excludesfile = ~/.config/git/ignore
 	quotepath = off
 
+[protocol]
+	version = 2
+
 [color]
 	ui = auto
 
