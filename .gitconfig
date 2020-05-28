@@ -68,6 +68,7 @@
 
 [diff]
 	mnemonicprefix = true
+	algorithm = histogram
 
 [push]
 	default = upstream
