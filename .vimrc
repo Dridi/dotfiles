@@ -82,6 +82,7 @@ if has("autocmd")
   autocmd BufNewFile,BufRead *.vcc    set filetype=rst
   autocmd BufNewFile,BufRead *.jelly  set filetype=xml
   autocmd BufNewFile,BufRead *.gradle set filetype=groovy
+  autocmd BufNewFile,BufRead *.jinja  set filetype=jinja
 endif
 
 "
@@ -256,5 +257,6 @@ Plug 'scrooloose/syntastic', { 'tag': '3.10.0' }
 Plug 'bronson/vim-visual-star-search'
 Plug 'airblade/vim-gitgutter'
 Plug 'lzap/vim-selinux'
+Plug 'mitsuhiko/vim-jinja'
 
 call plug#end()
