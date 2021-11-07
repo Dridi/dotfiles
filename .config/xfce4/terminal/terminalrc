@@ -12,7 +12,7 @@ MiscToolbarDefault=FALSE
 MiscConfirmClose=TRUE
 MiscCycleTabs=TRUE
 MiscTabCloseButtons=TRUE
-MiscTabCloseMiddleClick=TRUE
+MiscTabCloseMiddleClick=FALSE
 MiscTabPosition=GTK_POS_TOP
 MiscHighlightUrls=TRUE
 MiscBellUrgent=FALSE
@@ -22,4 +22,13 @@ MiscDefaultWorkingDir=
 MiscRewrapOnResize=TRUE
 MiscUseShiftArrowsToScroll=FALSE
 ShortcutsNoHelpkey=TRUE
+MiscCopyOnSelect=FALSE
+MiscShowRelaunchDialog=TRUE
+MiscSlimTabs=FALSE
+MiscNewTabAdjacent=FALSE
+WordChars=-A-Za-z0-9,./?%&#_=+@~
+MiscSearchDialogOpacity=100
+MiscShowUnsafePasteDialog=TRUE
+ScrollingBar=TERMINAL_SCROLLBAR_NONE
+TitleMode=TERMINAL_TITLE_REPLACE
 
