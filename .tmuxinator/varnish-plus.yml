@@ -12,7 +12,7 @@ windows:
       layout: main-horizontal
       root: ~/varnish/src/<%= "#{pkg}" %>
       panes:
-        - nvim -c :vsplit $(git ls-files '*.[ch]')
+        - sleep 1; nvim -c :vsplit $(git ls-files '*.[ch]')
         - git status
 <% end %>
 
