@@ -29,6 +29,7 @@ MiscNewTabAdjacent=FALSE
 WordChars=-A-Za-z0-9,./?%&#_=+@~
 MiscSearchDialogOpacity=100
 MiscShowUnsafePasteDialog=TRUE
+MiscRightClickAction=TERMINAL_RIGHT_CLICK_ACTION_CONTEXT_MENU
 ScrollingBar=TERMINAL_SCROLLBAR_NONE
 TitleMode=TERMINAL_TITLE_REPLACE
 
