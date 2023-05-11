@@ -16,6 +16,9 @@
 	commit = bold yellow
 	meta = yellow
 
+[color "advice"]
+	hint = bold yellow
+
 [alias]
 	h = help
 
@@ -88,3 +91,13 @@
 
 [help]
 	autocorrect = 50
+
+[sendemail]
+	smtpencryption = tls
+	smtpserver = smtp.gmail.com
+	smtpuser = dridi.boukelmoune@gmail.com
+	smtpserverport = 587
+	annotate = yes
+
+[init]
+	defaultBranch = master
