@@ -47,6 +47,17 @@ then
 elif [ -f "$gitdir/REVERT_HEAD" ]
 then
 	git revert --abort
+elif [ -f "$gitdir/sequencer/todo" ]
+then
+	read todo args <"$gitdir/sequencer/todo"
+	case $todo in
+	revert)
+		git revert --abort
+		;;
+	p|pick)
+		git cherry-pick --abort
+		;;
+	esac
 else
 	echo "git-abort: unsupported state, aborting." >&2
 	exit 1
