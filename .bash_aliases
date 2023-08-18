@@ -39,10 +39,18 @@ rpmqf() {
 }
 
 # misc
+magic() {
+	od -A n -N 4 -t x4 </dev/urandom |
+	sed '
+		s:\s*::g
+		s:^:0x:
+	'
+}
+
 crc32() {
 	for i
 	do
-		local CRC=$(echo -n "$i" | cksum | cut -d' ' -f1)
+		local CRC=$(printf '%s' "$i" | cksum | cut -d' ' -f1)
 		printf "0x%08x\n" "$CRC"
 	done
 }
