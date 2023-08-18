@@ -13,11 +13,13 @@
 	changed = yellow
 
 [color "diff"]
-	commit = bold yellow
+	commit = yellow bold
 	meta = yellow
+	new = 154
+	old = 196
 
 [color "advice"]
-	hint = bold yellow
+	hint = yellow bold
 
 [alias]
 	h = help
