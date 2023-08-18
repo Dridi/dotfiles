@@ -54,7 +54,7 @@
 	undo = reset --hard
 	type = cat-file -t
 	dump = cat-file -p
-	todo = grep -Iw -ie todo -ie fixme -ie xxx -e UnsupportedOperationException -e 'INCOMPL(ETE)?\\(\\)' -e xxxassert -e XXXAN -e XXXAZ -e 'unimplemented!' -e 'panic!'
+	todo = grep -Iw -ie todo -ie fixme -ie xxx -e UnsupportedOperationException -e 'INCOMPL(ETE)?' -e xxxassert -e XXXAN -e XXXAZ -e 'unimplemented!' -e 'panic!'
 	authors = !git log --all --format='%an <%ae>' | sort -u
 	aliases = !git config --get-regexp 'alias.*' | colrm 1 6 | sed 's/ / = /'
 	who = !git config --get 'user.email' | tail -n 1 | cut -d @ -f 2
