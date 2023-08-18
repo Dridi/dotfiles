@@ -222,8 +222,8 @@ endfunction
 highlight OverLength ctermbg=red ctermfg=white
 highlight TrailingSpaces ctermbg=yellow
 
-au BufEnter,BufWinEnter *  match OverLength     /\%>78v.\+/
-au BufEnter,BufWinEnter * 2match TrailingSpaces /\v\s+$/
+au BufEnter,WinEnter,BufWinEnter *  match OverLength     /\%>78v.\+/
+au BufEnter,WinEnter,BufWinEnter * 2match TrailingSpaces /\s\+$/
 
 "
 " background
