@@ -97,7 +97,6 @@
 	smtpserver = smtp.gmail.com
 	smtpuser = dridi.boukelmoune@gmail.com
 	smtpserverport = 587
-	annotate = yes
-
+	annotate = true
 [init]
 	defaultBranch = master
