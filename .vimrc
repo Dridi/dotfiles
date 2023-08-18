@@ -185,16 +185,17 @@ endfunction
 "
 " Hard wrapping
 "
-let b:hardwrapping=0
+set textwidth=78
+let g:hardwrapping=0
 nmap <leader>h :call ToggleHardWrapping()<CR>
 function! ToggleHardWrapping()
   try
-    if b:hardwrapping == 0
+    if g:hardwrapping == 0
       set fo+=ta
-      let b:hardwrapping=1
+      let g:hardwrapping=1
     else
       set fo-=ta
-      let b:hardwrapping=0
+      let g:hardwrapping=0
     endif
   finally
     call SummarizeHardWrapping()
@@ -205,7 +206,7 @@ function! SummarizeHardWrapping()
   try
     echohl ModeMsg
     echon "Hard wrapping: "
-    if b:hardwrapping == 0
+    if g:hardwrapping == 0
       echon "disabled"
     else
       echon "enabled"
