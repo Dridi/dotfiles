@@ -1,7 +1,7 @@
 %global debug_package %{nil}
 
 Name:           unrar
-Version:        5.6.8
+Version:        6.2.10
 Release:        1%{?dist}
 Summary:        RAR archive extractor
 
@@ -33,5 +33,8 @@ Free of charge %{summary}.
 
 
 %changelog
+* Fri Aug 18 2023 Dridi Boukelmoune <dridi@fedoraproject.org> - 6.2.10-1
+- Bump version to 6.2.10
+
 * Tue Oct 16 2018 Dridi Boukelmoune <dridi@fedoraproject.org> - 5.6.8-1
 - Initial spec
