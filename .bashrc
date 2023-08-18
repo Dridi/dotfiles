@@ -35,7 +35,7 @@ source_if_exists /usr/share/git-core/contrib/completion/git-prompt.sh
 
 if command -v __git_ps1 >/dev/null
 then
-	PS1='\[\033[38m\]\u@\h\[\033[01;34m\] \w \[\033[31m\]$(__git_ps1 "(%s)")\[\033[00m\]$ '
+	PS1='\[\033[38m\]\u \[\033[01;34m\]\w \[\033[31m\]$(__git_ps1 "(%s)")\[\033[00m\]$ '
 
 	GIT_PS1_SHOWDIRTYSTATE=true
 	GIT_PS1_SHOWUNTRACKEDFILES=true
