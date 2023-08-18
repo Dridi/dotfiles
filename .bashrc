@@ -19,6 +19,9 @@ HISTCONTROL=ignoreboth
 HISTSIZE=1000
 HISTFILESIZE=2000
 
+# tty
+stty -ixon
+
 # vim
 export EDITOR=vim
 
@@ -66,7 +69,7 @@ export LESS_TERMCAP_ZW=$(tput rsupm)	# end superscript
 source_if_exists /usr/share/gems/gems/tmuxinator*/completion/tmuxinator.bash
 
 # X11
-xfix
+#xfix
 
 # vagrant
 export VAGRANT_DEFAULT_PROVIDER=virtualbox
