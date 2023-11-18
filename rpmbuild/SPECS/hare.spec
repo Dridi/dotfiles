@@ -110,6 +110,7 @@ EOF
 
 %install
 %make_install
+mkdir %{buildroot}%{_usrsrc}/%{name}/third-party
 
 mkdir -p %{buildroot}/%{rpmmacrodir}
 tee >%{buildroot}/%{rpmmacrodir}/macros.%{name} <<EOF
