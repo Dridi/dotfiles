@@ -1,0 +1,25 @@
+From bbb740cc69ea3fecaba74ca36ee81663f86497ce Mon Sep 17 00:00:00 2001
+From: Dridi Boukelmoune <dridi.boukelmoune@gmail.com>
+Date: Mon, 4 Dec 2023 08:05:32 +0100
+Subject: [PATCH] cmd/hare: Double mkfile() buffer size
+
+---
+ cmd/hare/plan.ha | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/cmd/hare/plan.ha b/cmd/hare/plan.ha
+index d8e7ac5d..9f4af265 100644
+--- a/cmd/hare/plan.ha
++++ b/cmd/hare/plan.ha
+@@ -319,7 +319,7 @@ fn execute(
+ };
+ 
+ fn mkfile(plan: *plan, input: str, ext: str) str = {
+-	static let namebuf: [32]u8 = [0...];
++	static let namebuf: [64]u8 = [0...];
+ 	const name = fmt::bsprintf(namebuf, "temp.{}.{}.{}",
+ 		input, plan.counter, ext);
+ 	plan.counter += 1;
+-- 
+2.43.0
+

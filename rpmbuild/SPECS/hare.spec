@@ -24,6 +24,7 @@ Release:        1%{?dist}
 
 URL:            https://harelang.org/
 Source:         https://git.sr.ht/~sircmpwn/%{name}/archive/%{shortcommit}.tar.gz
+Patch0:         hare-cmd-hare-Double-mkfile-buffer-size.patch
 
 BuildRequires:  binutils
 BuildRequires:  harec
