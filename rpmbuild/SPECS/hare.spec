@@ -31,9 +31,11 @@ BuildRequires:  harec
 BuildRequires:  make
 BuildRequires:  qbe
 BuildRequires:  scdoc
+BuildRequires:  tzdata
 
 Requires:       hare-stdlib = %{version}-%{release}
 Requires:       harec
+Requires:       tzdata
 
 # See cross toolchain in config.mk below
 Requires:       gcc
