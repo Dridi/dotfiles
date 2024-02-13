@@ -128,6 +128,10 @@ tee >%{buildroot}/%{rpmmacrodir}/macros.%{name} <<EOF
 %%hare_host_arches %{hare_arches}
 EOF
 
+# riscv64-linux-gnu-as doesn't recognize double-slash comments
+find %{buildroot}%{_usrsrc} -path '*riscv64*' -name '*.s' |
+xargs -n 1 sed -i 's:^//:#:'
+
 
 %check
 %make_build check
