@@ -1,4 +1,4 @@
-%global ldlinkflags -z noexecstack %{lua:
+%global ldlinkflags %{lua:
 sep=''
 for gcc_flag in string.gmatch(macros.build_ldflags, '%S+') do
     if gcc_flag:match '^\-Wl,' then
@@ -84,8 +84,8 @@ QBEFLAGS =
 AS = %{__as}
 AR = %{__ar}
 LD = %{__ld}
-LDFLAGS = %{build_ldflags}
-LDLINKFLAGS = %{ldlinkflags}
+LDFLAGS = -Wl,-z,noexecstack %{build_ldflags}
+LDLINKFLAGS = -z noexecstack %{ldlinkflags}
 SCDOC = scdoc
 HARECACHE = .cache
 BINOUT = .bin
