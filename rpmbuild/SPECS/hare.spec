@@ -109,7 +109,7 @@ EOF
 mkdir %{buildroot}%{_usrsrc}/%{name}/third-party
 
 mkdir -p %{buildroot}/%{rpmmacrodir}
-tee >%{buildroot}/%{rpmmacrodir}/macros.%{name} <<EOF
+tee %{buildroot}/%{rpmmacrodir}/macros.%{name} <<EOF
 # Architectures where hare(1) can run
 %%hare_build_arches %{qbe_arches}
 
