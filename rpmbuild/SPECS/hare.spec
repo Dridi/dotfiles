@@ -37,12 +37,12 @@ Requires:       harec
 Requires:       tzdata
 
 # See cross toolchain in config.mk below
-Requires:       gcc
 Requires:       binutils
+Recommends:     gcc
 %{lua:
 for arch in string.gmatch(macros.hare_arches, '%S+') do
     if arch ~= macros._arch then
-        print("Requires: binutils-"..arch.."-linux-gnu\n")
+        print("Recommends: gcc-"..arch.."-linux-gnu\n")
     end
 end}
 
@@ -81,9 +81,6 @@ HAREC = harec
 HARECFLAGS =
 QBE = qbe
 QBEFLAGS =
-AS = %{__as}
-AR = %{__ar}
-LD = %{__ld}
 LDFLAGS = -Wl,-z,noexecstack %{build_ldflags}
 LDLINKFLAGS = -z noexecstack %{ldlinkflags}
 SCDOC = scdoc
@@ -92,21 +89,13 @@ BINOUT = .bin
 %{lua:
 for arch in string.gmatch(macros.hare_arches, '%S+') do
     local host = arch.."-linux-gnu-"
-    local host_as = "as"
-    local host_ar = "ar"
-    local host_cc = "cc"
-    local host_ld = "ld"
     if arch == macros._arch then
         host = ""
-        host_as = macros.__as
-        host_ar = macros.__ar
-        host_cc = macros.__cc
-        host_ld = macros.__ld
     end
-    print(string.upper(arch).."_AS = "..host..host_as.."\n")
-    print(string.upper(arch).."_AR = "..host..host_ar.."\n")
-    print(string.upper(arch).."_CC = "..host..host_cc.."\n")
-    print(string.upper(arch).."_LD = "..host..host_ld.."\n")
+    print(string.upper(arch).."_AS = "..host.."as\n")
+    print(string.upper(arch).."_AR = "..host.."ar\n")
+    print(string.upper(arch).."_CC = "..host.."gcc\n")
+    print(string.upper(arch).."_LD = "..host.."ld\n")
 end}
 EOF
 
