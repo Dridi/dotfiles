@@ -11,8 +11,6 @@ end}
 %global qbe_arches  x86_64 aarch64
 %global hare_arches x86_64 aarch64 riscv64
 
-%global preview rc2
-
 Summary:        The Hare programming language
 Name:           hare
 License:        GPL-3.0-only
@@ -23,7 +21,7 @@ Release:        1%{?preview:.%preview}%{?dist}
 URL:            https://harelang.org/
 Source:         https://git.sr.ht/~sircmpwn/%{name}/archive/%{version}%{?preview:-%preview}.tar.gz
 Patch:          0001-Makefile-Build-haredoc-1-with-LDLINKFLAGS.patch
-Patch:          0002-time-chrono-leap-seconds.list-whitespace-parsing.patch
+Patch:          0002-debug-riscv-use-correct-comment-syntax.patch
 
 BuildRequires:  binutils
 BuildRequires:  harec
@@ -57,6 +55,7 @@ Hare is a systems programming language.
 %package stdlib
 Summary:        The Hare standard library
 License:        MPL-2.0
+BuildArch:      noarch
 
 
 %description stdlib
@@ -117,10 +116,6 @@ tee %{buildroot}/%{rpmmacrodir}/macros.%{name} <<EOF
 %%hare_host_arches %{hare_arches}
 EOF
 
-# riscv64-linux-gnu-as doesn't recognize double-slash comments
-find %{buildroot}%{_usrsrc} -path '*riscv64*' -name '*.s' |
-xargs -n 1 sed -i 's:^//:#:'
-
 
 %check
 %make_build check
@@ -142,6 +137,9 @@ xargs -n 1 sed -i 's:^//:#:'
 
 
 %changelog
+* Mon Feb 26 2024 Dridi Boukelmoune <dridi@fedoraproject.org> - 0.24.0-1
+- Update to Hare 0.24.0
+
 * Sun Feb 11 2024 Dridi Boukelmoune <dridi@fedoraproject.org> - 0.24.0-1.rc2
 - Update to Hare 0.24.0-rc2
 
